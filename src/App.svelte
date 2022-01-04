@@ -13,11 +13,15 @@ import Portfolio from "./Portfolio.svelte";
 
 	@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 	
+	body {
+		@apply bg-neutral-800
+	}
 	main {
 		width: 100vw;
-		margin: 0;
+		margin: auto;
 		height: 0;
 		font-family: 'Roboto', Arial, Helvetica, sans-serif;
+		max-width: 1400px;
 	}
 
 	*, *::before, *::after {

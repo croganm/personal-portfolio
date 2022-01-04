@@ -4,7 +4,7 @@
     let textWidth = sectionWidth-imgWidth
 </script>
 
-<section class="hero w-screen h-screen bg-neutral-800 text-white relative" bind:clientWidth={sectionWidth}>
+<section class="hero w-full h-screen bg-neutral-800 text-white relative" bind:clientWidth={sectionWidth}>
     <div class="hero__content">
         <h2>Mathew</h2>
         <h1>Crogan</h1>
@@ -17,9 +17,6 @@
 </section>
 
 <style lang="scss">
-    section {
-        padding: 0 5rem;
-    }
 
     .hero__content {
         width: 60%;
@@ -27,6 +24,7 @@
         flex-direction: column;
         &>* {
             display: inline-block;
+            line-height: 1;
         }
         h2 {
             font-size: 4vw;
@@ -35,6 +33,12 @@
         h1 {
             font-size: 8vw;
             font-weight: 300;
+            margin-bottom: .3em;
+        }
+        h4 {
+            font-size: 3vw;
+            font-weight: 700;
+            margin-bottom: .3em;
         }
     }
     
