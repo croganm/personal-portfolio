@@ -1,17 +1,28 @@
 <script>
+    import { onMount } from 'svelte';
+
     let imgWidth;
     let sectionWidth;
-    let textWidth = sectionWidth-imgWidth
+    let widthDiff = sectionWidth-imgWidth;
+    let textWidth = widthDiff ? `${widthDiff}px` : "60%";
+
+    $: {
+        console.log(imgWidth);
+        console.log(sectionWidth);
+        console.log(sectionWidth-imgWidth)
+        console.log(textWidth);
+    }
+
 </script>
 
-<section class="hero w-full h-screen bg-neutral-800 text-white relative" bind:clientWidth={sectionWidth}>
-    <div class="hero__content">
+<section class="hero w-full h-screen bg-neutral-800 text-white relative overflow-x-hidden" bind:clientWidth={sectionWidth}>
+    <div class="hero__content flex flex-col z-50" style="width: {textWidth};">
         <h2>Mathew</h2>
         <h1>Crogan</h1>
         <h4>Leader - Marketer - Developer</h4>
     </div>
     <div class="hero__img__container" bind:clientWidth={imgWidth}>
-        <img src="images/Profile Pic.png" alt="" class="hero__img">
+        <img src="images/Profile Pic.png" alt="" class="hero__img object-cover" width="3024" height="4023">
     </div>
         
 </section>
@@ -19,9 +30,9 @@
 <style lang="scss">
 
     .hero__content {
-        width: 60%;
-        display: flex;
-        flex-direction: column;
+        position: absolute;
+        top: 20%;
+        left: 20%;
         &>* {
             display: inline-block;
             line-height: 1;
@@ -45,7 +56,7 @@
     
     .hero__img__container {
         position: absolute;
-        right: 0;
+        right: 0%;
         top: 0;
         height: 100%;
         &::after {
@@ -59,12 +70,16 @@
             z-index: 5;
         }
         .hero__img{
-            height: 100%;
+            max-height: 100%;
             z-index: -1;
         }
 
         @media (max-width:768px) {
-            right: -20%;
+            transform: translateX(30%);
+        }
+        
+        @media (max-width:480px) {
+            transform: translateX(30%);
         }
     }
 
