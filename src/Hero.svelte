@@ -1,28 +1,37 @@
 <script>
+    import gsap from 'gsap';
+	import ScrollTrigger from 'gsap/ScrollTrigger';
+    import createTimeline from './components/timeline';
     import { onMount } from 'svelte';
 
-    let imgWidth;
-    let sectionWidth;
-    let widthDiff = sectionWidth-imgWidth;
-    let textWidth = widthDiff ? `${widthDiff}px` : "60%";
+    onMount(() => {
+		gsap.registerPlugin(ScrollTrigger)
 
-    $: {
-        console.log(imgWidth);
-        console.log(sectionWidth);
-        console.log(sectionWidth-imgWidth)
-        console.log(textWidth);
-    }
+        let tl = createTimeline({
+            trigger: ".hero",
+            tl_padding: "2000"
+        })
 
+        let targets = gsap.utils.toArray(".hero__content>*");
+        targets.forEach(element => {
+            // add animations and labels to the timeline
+            tl.to(element, {autoAlpha: 1, y:"-20%"})
+        })
+        targets.forEach(element => {
+            // add animations and labels to the timeline
+            tl.to(element, {autoAlpha: 0, y:"-10%"})
+        })
+    });
 </script>
 
-<section class="hero w-full h-screen bg-neutral-800 text-white relative overflow-x-hidden" bind:clientWidth={sectionWidth}>
-    <div class="hero__content flex flex-col z-50" style="width: {textWidth};">
+<section class="hero w-full h-screen text-white relative">
+    <div class="hero__content flex flex-col z-50">
         <h2>Mathew</h2>
         <h1>Crogan</h1>
         <h4>Leader - Marketer - Developer</h4>
     </div>
-    <div class="hero__img__container" bind:clientWidth={imgWidth}>
-        <img src="images/Profile Pic.png" alt="" class="hero__img object-cover" width="3024" height="4023">
+    <div class="hero__img__container">
+        <img src="images/Profile Pic.png" alt="" class="hero__img">
     </div>
         
 </section>
@@ -30,56 +39,55 @@
 <style lang="scss">
 
     .hero__content {
-        position: absolute;
+        position: relative;
         top: 20%;
-        left: 20%;
+        left: 10%;
+        width: 60%;
+        height: 100%;
         &>* {
             display: inline-block;
-            line-height: 1;
+            line-height: 1.15;
+            visibility: hidden;
         }
         h2 {
-            font-size: 4vw;
+            font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
             font-weight: 700;
         }
         h1 {
-            font-size: 8vw;
+            font-size: clamp(4rem, 8vw + 1.5rem, 7rem);
             font-weight: 300;
             margin-bottom: .3em;
+            position: relative;
+            color: theme("colors.lightgreen");
         }
         h4 {
-            font-size: 3vw;
+            font-size: clamp(1.45rem, 3vw + 1rem, 2.25rem);
             font-weight: 700;
             margin-bottom: .3em;
         }
+
+        // @media (max-width: theme('screens.md')) {
+            
+        // }
     }
     
     
     .hero__img__container {
         position: absolute;
-        right: 0%;
+        right: -20%;
         top: 0;
         height: 100%;
-        &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(180deg, rgba(30, 30, 30, 0) 20.31%, theme('colors.neutral.800') 79.69%);
-            z-index: 5;
-        }
         .hero__img{
             max-height: 100%;
-            z-index: -1;
+            z-index: 2;
         }
 
-        @media (max-width:768px) {
-            transform: translateX(30%);
+        @media (max-width:theme('screens.md')) {
+            right: -30%;
         }
         
-        @media (max-width:480px) {
-            transform: translateX(30%);
+        @media (max-width:theme('screens.sm')) {
+            right: -40%;
         }
     }
 
