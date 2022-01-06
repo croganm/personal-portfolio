@@ -44,7 +44,7 @@
         <h1>Crogan</h1>
         <h4>Leader - Marketer - Developer</h4>
     </div>
-    <div class="hero__img__container">
+    <div class="hero__img__container overflow-x-clip xl:overflow-visible">
         <img src="images/Profile Pic.png" alt="" class="hero__img">
     </div>
         

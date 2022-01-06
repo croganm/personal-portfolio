@@ -13,8 +13,13 @@ import Portfolio from "./Portfolio.svelte";
 
 	@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 	
+	
+	html {
+		@apply overflow-x-clip xl:overflow-visible;
+
+	}
 	body {
-		@apply bg-neutral-800 overflow-x-hidden;
+		@apply bg-neutral-800 overflow-x-clip xl:overflow-visible relative w-full;
 	}
 	main {
 		width: 100vw;
@@ -31,5 +36,9 @@ import Portfolio from "./Portfolio.svelte";
 	.highlight-text {
         color: theme("colors.lightgreen");
         font-weight: 700;
+    }
+	
+	.highlight-fill {
+        fill: theme("colors.lightgreen");
     }
 </style>
