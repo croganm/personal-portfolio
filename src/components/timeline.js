@@ -6,7 +6,8 @@ export default function createTimeline(object) {
         trigger: object.trigger,
         tl_padding: object.tl_padding || 2000,
         pin: object.pin || true,
-        start: object.start || "top top"
+        start: object.start || "top top",
+        markers: object.markers || true,
     }
     gsap.registerPlugin(ScrollTrigger)
 
@@ -18,7 +19,7 @@ export default function createTimeline(object) {
             start: defaultParams.start, // when the top of the trigger hits the top of the viewport
             end: `+=${defaultParams.tl_padding}`, // end after scrolling 1000px beyond the start
             scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-            markers: true,
+            markers: defaultParams.markers,
         }
     });
 

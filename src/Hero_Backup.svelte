@@ -6,34 +6,20 @@
 
     onMount(() => {
 		gsap.registerPlugin(ScrollTrigger)
-        let timelines = []
-        
+
+        let tl = createTimeline({
+            trigger: ".hero",
+            tl_padding: "2000"
+        })
+
         let targets = gsap.utils.toArray(".hero__content>*");
-        
-        // INITAL FADE IN OF ELEMENTS AND INITILIZATION OF TIMELINE
-        targets.forEach((element, index) => {
-            let tl = createTimeline({
-                trigger: ".hero",
-                tl_padding: "2000",
-                start: "top top",
-            })
-            timelines.push(tl)
+        targets.forEach(element => {
             // add animations and labels to the timeline
-            tl.to(element, {autoAlpha: 1, y:"-20%", duration: 5, delay:index})
+            tl.to(element, {autoAlpha: 1, y:"-20%"})
         })
-
-        // CREATE FALSE PALSE
-        targets.forEach((element, index) => {
-            let tl = timelines[index]
+        targets.forEach(element => {
             // add animations and labels to the timeline
-            tl.to(element, {autoAlpha: 1, duration: 3})
-        })
-
-        //FADEOUT
-        targets.forEach((element, index) => {
-            let tl = timelines[index]
-            // add animations and labels to the timeline
-            tl.to(element, {autoAlpha: 0, y:"-10%", duration: 5, delay: index*1.5})
+            tl.to(element, {autoAlpha: 0, y:"-10%"})
         })
     });
 </script>

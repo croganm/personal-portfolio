@@ -14,29 +14,27 @@
             trigger: `.${title.toLowerCase()}-section`, 
             tl_padding: 200, 
             pin: false,
-            start: "top 10%"
-        })
-        let tlTitleOut = createTimeline({
-            trigger: `.${title.toLowerCase()}-section`, 
-            tl_padding: 200, 
-            pin: false,
-            start: "bottom bottom"
+            start: "top 10%",
+            markers: {startColor: "white", endColor: "white"},
         })
         let tl = createTimeline({
             trigger: `.${title.toLowerCase()}-section`, 
             tl_padding: 3000, 
         })
 
-        tlTitleIn.to(`.${title.toLowerCase()}-section .content-section__title`, {autoAlpha: 1, y:"-20%"})
+        tlTitleIn.from(`.${title.toLowerCase()}-section .content-section__title`, {opacity: 0, y:"20%"})
         
         let targets = gsap.utils.toArray(`.${title.toLowerCase()}-section .content-section__text > *`);
         targets.forEach(element => {
             // add animations and labels to the timeline
-            tl.from(element, {autoAlpha: 0, y:"20%"})
-            tl.to(element, {autoAlpha: 0, y:"-10%"})
+            tl.from(element, {autoAlpha: 0, y:"20%", duration: 1})
+            tl.to(element, {autoAlpha: 1, duration: 3})
+            tl.to(element, {autoAlpha: 0, y:"-10%", duration: 1})
         })
+        
+        tl.from(`.${title.toLowerCase()}-section .content-section__title`, {opacity: 1, duration: 2})
+        tl.to(`.${title.toLowerCase()}-section .content-section__title`, {opacity: 0, y:"-20%", duration: 2})
 
-        tlTitleOut.to(`.${title.toLowerCase()}-section .content-section__title`, {autoAlpha: 0, y:"-10%"})
     })
 </script>
 

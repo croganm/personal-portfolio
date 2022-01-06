@@ -15,7 +15,7 @@
         font-size: clamp(3rem, 4vw + 2.5rem, 7rem);
         color: hsl(0, 0%, 90%);
         font-weight: 100;
-        visibility: hidden;
+        opacity: 1;
     }
 
     .content-section :global(p) {
