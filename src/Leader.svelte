@@ -36,9 +36,9 @@
         })
         
         tl.from(revenueGraph, {autoAlpha: 0, y:"20%", duration: 1})
-        tl.to(revenueGraph, {autoAlpha: 1, duration: 1})
-        tl.from(".revenue-graph__small-bar img", {y:100, duration: 2, delay: 3})
-        tl.from(".revenue-graph__tall-bar img", {y:300, duration: 2,})
+        tl.to(revenueGraph, {autoAlpha: 1, duration: 0.1})
+        tl.from(".revenue-graph__small-bar img", {y:100, duration: 3, delay: 3})
+        tl.from(".revenue-graph__tall-bar img", {y:300, duration: 3,})
         tl.to(revenueGraph, {autoAlpha: 1, duration: 1})
         tl.to(revenueGraph, {autoAlpha: 0, y:"-10%", duration: 1})
         
@@ -51,18 +51,15 @@
 <Section title={title}>
     <div>
         Currently, I am the lead manager of 
-        <span class="highlight-text">
-            Online Hearing
-        </span>
-        , a nationwide online, e-commerce hearing aid retailer. 
+        <span class="highlight-text">Online Hearing</span>, a nationwide e-commerce hearing aid retailer. 
     </div>
 
     <div>
         Under my leadership, I have managed to grow the business into a 
         <span class="highlight-text">
-            multi-million dollar leader
+            multi-million dollar 
         </span>
-         in the online hearing aid industry and lead a team of 30+ Audiologist and Hearing Aid Specialist to help thousands of patients across the nation.
+        innovater within the online hearing aid industry and led a team of 30+ Audiologists and Hearing Aid Specialists to help thousands of patients across the nation.
     </div>
 
     <div class="revenue-graph">
@@ -77,7 +74,7 @@
                 Revenue
             </div>
             <div class="revenue-graph__desc-text">
-                Within the First Year of Management
+                within the first year of management
             </div>
         </div>
         <div class="revenue-graph__small-bar">
