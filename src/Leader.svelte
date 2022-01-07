@@ -9,31 +9,39 @@
     let title = 'Leader';
 
     onMount(() => {
-        let sectionTitle = document.querySelector(`.${title.toLowerCase()}-section .content-section__title`)
+        const sectionTitle = document.querySelector(`.${title.toLowerCase()}-section .content-section__title`)
 
-        let tlTitleIn = createTimeline({
+        const tlTitleIn = createTimeline({
             trigger: `.${title.toLowerCase()}-section`, 
-            tl_padding: 400, 
+            tl_padding: 800, 
             pin: false,
             start: "top 25%",
-            markers: {startColor: "white", endColor: "white"},
         })
-        let tl = createTimeline({
+        const tl = createTimeline({
             
             trigger: `.${title.toLowerCase()}-section`, 
-            tl_padding: 3000, 
+            tl_padding: 4000, 
         })
 
         tlTitleIn.to(sectionTitle, {autoAlpha: 1, y:"-20%"})
         tlTitleIn.set(sectionTitle, {opacity: 1})
         
-        let targets = gsap.utils.toArray(`.${title.toLowerCase()}-section .content-section__text > *`);
+        const targets = gsap.utils.toArray(`.${title.toLowerCase()}-section .content-section__text > *`);
+        const revenueGraph = targets.splice(2)
         targets.forEach(element => {
             // add animations and labels to the timeline
             tl.from(element, {autoAlpha: 0, y:"20%", duration: 1})
-            tl.to(element, {autoAlpha: 1, duration: 3})
+            tl.to(element, {autoAlpha: 1, duration: 4})
             tl.to(element, {autoAlpha: 0, y:"-10%", duration: 1})
         })
+        
+        tl.from(revenueGraph, {autoAlpha: 0, y:"20%", duration: 1})
+        tl.to(revenueGraph, {autoAlpha: 1, duration: 1})
+        tl.from(".revenue-graph__small-bar img", {y:100, duration: 2, delay: 3})
+        tl.from(".revenue-graph__tall-bar img", {y:300, duration: 2,})
+        tl.to(revenueGraph, {autoAlpha: 1, duration: 1})
+        tl.to(revenueGraph, {autoAlpha: 0, y:"-10%", duration: 1})
+        
         tl.from(sectionTitle, {opacity: 1, duration: 1})
         tl.to(sectionTitle, {opacity: 0, y:"-20%", duration: 2})
 
@@ -72,6 +80,12 @@
                 Within the First Year of Management
             </div>
         </div>
+        <div class="revenue-graph__small-bar">
+            <img src="images/SmallBar.svg" alt="">
+        </div>
+        <div class="revenue-graph__tall-bar">
+            <img src="images/TallBar.svg" alt="">
+        </div>
     </div>
         
 
@@ -85,7 +99,7 @@
         &__text {
             position: relative;
             height: 100%;
-            @apply top-1/4 xs:top-2/12 lg:top-1/12;
+            @apply top-2/12 xs:top-1/12 lg:top-0 z-10;
             &>* {
                 font-size: clamp(4rem, 5vw + 1rem, 6rem) !important;
                 line-height: 1;
@@ -102,6 +116,7 @@
                 display: inline;
                 height: clamp(3rem, 5vw + .5rem, 5rem);
                 vertical-align: baseline;
+                animation: pulsate 1s ease-in-out 500ms infinite alternate;
             }
         }
         
@@ -117,5 +132,32 @@
             max-width: 40rem;
             left: clamp(0.5rem, 20% - 2rem, 20%);
         }
+
+        &__small-bar {
+            position: absolute;
+            height: 150px;
+            @apply top-4/12 xs:top-4/12 lg:top-4/12 right-4/12 md:right-4/12 lg:right-3/12 z-0;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+            }
+        }
+        
+        &__tall-bar {
+            position: absolute;
+            height: 350px;
+            right:20%;
+            @apply top-1/12 md:top-1/12 right-0 md:right-2/12 lg:right-2/12 z-0;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+            }
+        }
+    }
+
+    @keyframes pulsate {
+        100% {transform: translateY(-10%);}
     }
 </style>

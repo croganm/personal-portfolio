@@ -7,7 +7,7 @@ export default function createTimeline(object) {
         tl_padding: object.tl_padding || 2000,
         pin: object.pin || true,
         start: object.start || "top top",
-        markers: object.markers || true,
+        markers: object.markers || false,
     }
     gsap.registerPlugin(ScrollTrigger)
 

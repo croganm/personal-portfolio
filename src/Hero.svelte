@@ -6,13 +6,28 @@
 
     onMount(() => {
 		gsap.registerPlugin(ScrollTrigger)
-        let timelines = []
         
+        const tlImage = createTimeline({
+            trigger: ".hero",
+            tl_padding: "2000",
+            start: "top top",
+        })
+        // const tlImageOut = createTimeline({
+        //     trigger: ".hero",
+        //     tl_padding: "400",
+        //     start: "center top",
+        //     markers: {startColor: "blue", endColor: "blue"},
+        // })
+        tlImage.set(".hero__img__container", {display: "block"})
+        tlImage.from(".hero__img__container", {autoAlpha:0, x:"200", duration: 2})
+        tlImage.to(".hero__img__container", {autoAlpha:1, x:0, duration: 10})
+        
+        let timelines = []
         let targets = gsap.utils.toArray(".hero__content>*");
         
         // INITAL FADE IN OF ELEMENTS AND INITILIZATION OF TIMELINE
         targets.forEach((element, index) => {
-            let tl = createTimeline({
+            var tl = createTimeline({
                 trigger: ".hero",
                 tl_padding: "2000",
                 start: "top top",
@@ -21,20 +36,23 @@
             // add animations and labels to the timeline
             tl.to(element, {autoAlpha: 1, y:"-20%", duration: 5, delay:index})
         })
-
+        
         // CREATE FALSE PALSE
         targets.forEach((element, index) => {
-            let tl = timelines[index]
+            var tl = timelines[index]
             // add animations and labels to the timeline
             tl.to(element, {autoAlpha: 1, duration: 3})
         })
-
+        
         //FADEOUT
         targets.forEach((element, index) => {
-            let tl = timelines[index]
+            var tl = timelines[index]
             // add animations and labels to the timeline
             tl.to(element, {autoAlpha: 0, y:"-10%", duration: 5, delay: index*1.5})
         })
+        
+        tlImage.to(".hero__img__container", {autoAlpha:0, x:200, duration: 2})
+        tlImage.set(".hero__img__container", {display: "none"})
     });
 </script>
 
@@ -45,7 +63,7 @@
         <h4>Leader - Marketer - Developer</h4>
     </div>
     <div class="hero__img__container overflow-x-clip xl:overflow-visible">
-        <img src="images/Profile Pic.png" alt="" class="hero__img">
+        <img src="images/Profile_Pic-min.png" alt="" class="hero__img">
     </div>
         
 </section>
@@ -91,6 +109,7 @@
         right: -20%;
         top: 0;
         height: 100%;
+        display: none;
         .hero__img{
             max-height: 100%;
             z-index: 2;
